@@ -16,21 +16,9 @@ Since both ToF sensors have the same hardware I2C address (`0x29`), we must conn
 * **Power & ground for both**
 
 ## Source of the Sensor Libraries
-To communicate with the VL53L8CX sensors, this project requires the official **Ultra Lite Driver (ULD) API**. 
-
-To keep this repository clean and respect licensing, the library files (`.c` and `.h`) **are not included** in the `ToF_sensor` folder. You must download them from GitHub and place them into the folder yourself before compiling.
-
-**How to get the API files:**
-1. Clone the ULD API repository from GitHub into a temporary directory:
-    ```bash
-    git clone https://github.com/STMicroelectronics/vl53l8cx-uld.git /tmp/vl53l8cx_api
-    ```
-2. Copy all the `.c` and `.h` files from the cloned repository directly into the `ToF_sensor/` directory of this project:
-    ```bash
-    cp /tmp/vl53l8cx_api/src/* ~/RPI5-Backend/ToF_sensor/
-    cp /tmp/vl53l8cx_api/inc/* ~/RPI5-Backend/ToF_sensor/
-    ```
-3. Make sure that files like `vl53l8cx_api.c`, `vl53l8cx_platform.c`, and all header files are now sitting in the same folder as `main.c`.
+All necessary sensor libraries are directly included in this repository so you can compile the project out-of-the-box. 
+* The core Ultra Lite Driver (ULD) API files for the VL53L8CX are sourced from the [stm32duino/VL53L8CX](https://github.com/stm32duino/VL53L8CX) repository.
+* The `vl53l8cx_platform.c` and `vl53l8cx_platform.h` files have been significantly modified specifically for this project to drop Arduino dependencies and directly utilize the standard Linux `/dev/i2c-x` bus.
 
 ## Step 1: Raspberry Pi Configuration
 Before compiling the code, you need to enable both hardware I2C buses. You can configure everything directly via the command line:
@@ -59,7 +47,6 @@ Before compiling the code, you need to enable both hardware I2C buses. You can c
     git clone https://github.com/Project-Humanoid-Head/RPI5-Backend.git
     cd RPI5-Backend/ToF_sensor
     ```
-
 3. Compile the ToF sensor code into an executable binary:
     ```bash
     gcc *.c -o tof_streamer -lm
