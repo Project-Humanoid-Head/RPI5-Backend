@@ -65,7 +65,7 @@ Before compiling the code, you need to enable both hardware I2C buses. You can c
     gcc *.c -o tof_streamer -lm
     ```
 
-## 🚀 Step 3: Setting Up Automatic Startup (systemd)
+## Step 3: Setting Up Automatic Startup (systemd)
 To make the Raspberry Pi start the vision system automatically upon booting, we use the provided script and `systemd` service.
 
 1. Navigate to the startup scripts folder:
