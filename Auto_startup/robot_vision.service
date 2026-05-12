@@ -1,0 +1,16 @@
+[Unit]
+Description=Stereo Vision System - 2x ToF + 2x RGB
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=nico
+WorkingDirectory=/home/nico/RPI5-Backend/Auto_startup
+ExecStart=/home/nico/RPI5-Backend/Auto_startup/start_vision.sh
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
